@@ -71,7 +71,7 @@ int main() {
 
     // Read sales from the input file
     for (int i = 0; i < NUM_MONTHS; i++) {
-        printf("Plase enter sales data: ");
+        printf("Plase enter sales data (%i/12): ", i+1);
         if (scanf("%f", &sales[i]) != 1) {
             printf("Error reading sales data.\n");
             return 1;

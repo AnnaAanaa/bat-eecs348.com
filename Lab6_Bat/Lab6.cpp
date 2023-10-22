@@ -4,13 +4,18 @@
 
 const int MAX_SIZE = 100;
 
-void readMatrixFromFile(int matrix[MAX_SIZE][MAX_SIZE], int& N) {
+void readMatrixFromFile(int matrixA[MAX_SIZE][MAX_SIZE], int matrixB[MAX_SIZE][MAX_SIZE], int& N) {
     std::ifstream inputFile("matrix_input.txt");
     if (inputFile.is_open()) {
         inputFile >> N;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                inputFile >> matrix[i][j];
+                inputFile >> matrixA[i][j];
+            }
+        }
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                inputFile >> matrixB[i][j];
             }
         }
         inputFile.close();
@@ -62,10 +67,9 @@ int main() {
     int matrixB[MAX_SIZE][MAX_SIZE];
     int result[MAX_SIZE][MAX_SIZE];
 
-    readMatrixFromFile(matrixA, N);
-    readMatrixFromFile(matrixB, N);
+    readMatrixFromFile(matrixA, matrixB, N);
 
-    std::cout << "Your name" << std::endl;
+    std::cout << "Naran Bat" << std::endl;
     std::cout << "Lab #6: Matrix manipulation" << std::endl;
 
     std::cout << "Matrix A:" << std::endl;

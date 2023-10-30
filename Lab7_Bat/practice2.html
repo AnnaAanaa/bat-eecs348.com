@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Font Control</title>
+    <style>
+        p {
+            color: rgb(0, 0, 0);
+            border: 2px solid rgb(0, 0, 0);
+        }
+    </style>
+</head>
+<body>
+    <p>Some dummy text</p>
+    <label for="color">Text Color (Red, Green, Blue): </label>
+    <input type="text" id="color">
+    <label for="border-color">Border Color (Red, Green, Blue): </label>
+    <input type="text" id="border-color">
+    <label for="border-width">Border Width (Pixels): </label>
+    <input type="number" id="border-width">
+    <button onclick="changeFontStyle()">Apply</button>
+
+    <script>
+        function changeFontStyle() {
+            const textColor = document.getElementById("color").value;
+            const borderColor = document.getElementById("border-color").value;
+            const borderWidth = document.getElementById("border-width").value;
+
+            const p = document.querySelector("p");
+            p.style.color = `rgb(${textColor})`;
+            p.style.borderColor = `rgb(${borderColor})`;
+            p.style.borderWidth = `${borderWidth}px`;
+        }
+    </script>
+</body>
+</html>

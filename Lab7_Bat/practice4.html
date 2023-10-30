@@ -28,24 +28,25 @@
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $number = $_POST["number"];
-        echo "<h2>Multiplication Table for $number</h2>";
+        echo "<h2>Multiplication Table for 1 to $number</h2>";
         echo "<table>";
+        
+        // Table header
+        echo "<tr><th>&times;</th>";
         for ($i = 1; $i <= $number; $i++) {
-            echo "<tr>";
+            echo "<th>$i</th>";
+        }
+        echo "</tr>";
+
+        // Table content
+        for ($i = 1; $i <= $number; $i++) {
+            echo "<tr><th>$i</th>";
             for ($j = 1; $j <= $number; $j++) {
-                if ($j === 1) {
-                    if ($i === 1) {
-                        echo "<th>&times;</th>";
-                    } else {
-                        echo "<th>$i</th>";
-                    }
-                }
-                if ($j !== 1) {
-                    echo "<td>" . ($i * $j) . "</td>";
-                }
+                echo "<td>" . ($i * $j) . "</td>";
             }
             echo "</tr>";
         }
+
         echo "</table>";
     }
     ?>

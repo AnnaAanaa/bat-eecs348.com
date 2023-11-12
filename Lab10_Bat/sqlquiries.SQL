@@ -11,10 +11,10 @@ ORDER BY StdGPA DESC;
 /*3*/
 SELECT *
 FROM Course
-WHERE CourseNo LIKE 'IS%' AND CrsDesc LIKE '%SENIOR%';
+WHERE CourseNo LIKE 'IS4%';
 
 /*4*/
-SELECT OfferingNumber, CourseNo
+SELECT OfferNo, CourseNo
 FROM Offering
 WHERE OffTerm = 'SUMMER' AND FacNo IS NULL;
 

@@ -1,10 +1,20 @@
+/*1*/
+SELECT StdFirstName, StdLastName, StdCity, StdGPA
+FROM Student
+WHERE StdGPA > 3.7;
+
 +--------------+-------------+---------+--------+
 | StdFirstName | StdLastName | StdCity | StdGPA |
 +--------------+-------------+---------+--------+
 | CRISTOPHER   | COLAN       | SEATTLE |   4.00 |
 | WILLIAM      | PILGRIM     | BOTHELL |   3.80 |
 +--------------+-------------+---------+--------+
-2 rows in set (0.001 sec)
+
+
+/*2*/
+SELECT StdFirstName, StdLastName, StdGPA
+FROM Student
+ORDER BY StdGPA DESC;
 
 +--------------+-------------+--------+
 | StdFirstName | StdLastName | StdGPA |
@@ -21,7 +31,12 @@
 | ROBERTO      | MORALES     |   2.50 |
 | LUKE         | BRAZZI      |   2.20 |
 +--------------+-------------+--------+
-11 rows in set (0.001 sec)
+
+
+/*3*/
+SELECT *
+FROM Course
+WHERE CourseNo LIKE 'IS4%';
 
 +----------+-------------------------------------+----------+
 | CourseNo | CrsDesc                             | CrsUnits |
@@ -30,7 +45,12 @@
 | IS470    | BUSINESS DATA COMMUNICATIONS        |        4 |
 | IS480    | FUNDAMENTALS OF DATABASE MANAGEMENT |        4 |
 +----------+-------------------------------------+----------+
-3 rows in set (0.001 sec)
+
+
+/*4*/
+SELECT OfferNo, CourseNo
+FROM Offering
+WHERE OffTerm = 'SUMMER' AND FacNo IS NULL;
 
 +---------+----------+
 | OfferNo | CourseNo |
@@ -38,7 +58,13 @@
 |    1111 | IS320    |
 |    2222 | IS460    |
 +---------+----------+
-2 rows in set (0.001 sec)
+
+
+/*5*/
+SELECT O.OfferNo, O.CourseNo, F.FacFirstName, F.FacLastName
+FROM Offering O
+JOIN Faculty F ON O.FacNo = F.FacNo
+WHERE O.OffTerm = 'SPRING' AND F.FacRank = 'ASST' AND O.FacNo = F.FacNo;
 
 +---------+----------+--------------+-------------+
 | OfferNo | CourseNo | FacFirstName | FacLastName |
@@ -46,7 +72,12 @@
 |    3333 | IS320    | LEONARD      | VINCE       |
 |    5679 | IS480    | CRISTOPHER   | COLAN       |
 +---------+----------+--------------+-------------+
-2 rows in set (0.001 sec)
+
+
+/*6*/
+SELECT DISTINCT FacNo
+FROM Offering
+WHERE FacNo IS NOT NULL;
 
 +-------------+
 | FacNo       |
@@ -58,7 +89,16 @@
 | 876-54-3210 |
 | 654-32-1098 |
 +-------------+
-6 rows in set (0.001 sec)
+
+
+/*7*/
+SELECT StdFirstName
+FROM Student
+WHERE StdCity = 'BOTHELL'
+UNION
+SELECT FacFirstName
+FROM Faculty
+WHERE FacCity = 'BELLEVUE'; 
 
 +--------------+
 | StdFirstName |
@@ -67,9 +107,13 @@
 | WILLIAM      |
 | NICKI        |
 +--------------+
-3 rows in set (0.001 sec)
 
-Query OK, 1 row affected (0.001 sec)
+
+/*8*/
+INSERT INTO Student (StdNo, StdFirstName, StdLastName, StdCity, StdState, StdMajor, StdClass, StdGPA, StdZip)
+VALUES ('999-99-9999', 'JOHN', 'DOE', 'LAWRENCE', 'KS', 'FIN', 'FR', 4.0, '66045');
+
+SELECT * FROM Student;
 
 +-------------+--------------+-------------+----------+----------+------------+----------+----------+--------+
 | StdNo       | StdFirstName | StdLastName | StdCity  | StdState | StdZip     | StdMajor | StdClass | StdGPA |
@@ -87,10 +131,14 @@ Query OK, 1 row affected (0.001 sec)
 | 901-23-4567 | WILLIAM      | PILGRIM     | BOTHELL  | WA       | 98113-1885 | IS       | SO       |   3.80 |
 | 999-99-9999 | JOHN         | DOE         | LAWRENCE | KS       | 66045      | FIN      | FR       |   4.00 |
 +-------------+--------------+-------------+----------+----------+------------+----------+----------+--------+
-12 rows in set (0.001 sec)
 
-Query OK, 1 row affected (0.001 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
+
+/*9*/
+UPDATE Student
+SET StdMajor = 'ACCT'
+WHERE StdFirstName = 'HOMER' AND StdLastName = 'WELLS';
+
+SELECT * FROM Student;
 
 +-------------+--------------+-------------+----------+----------+------------+----------+----------+--------+
 | StdNo       | StdFirstName | StdLastName | StdCity  | StdState | StdZip     | StdMajor | StdClass | StdGPA |
@@ -108,12 +156,16 @@ Rows matched: 1  Changed: 1  Warnings: 0
 | 901-23-4567 | WILLIAM      | PILGRIM     | BOTHELL  | WA       | 98113-1885 | IS       | SO       |   3.80 |
 | 999-99-9999 | JOHN         | DOE         | LAWRENCE | KS       | 66045      | FIN      | FR       |   4.00 |
 +-------------+--------------+-------------+----------+----------+------------+----------+----------+--------+
-12 rows in set (0.001 sec)
 
+
+/*10*/
+SELECT *
+FROM Student S
+JOIN Faculty F ON S.StdNo = F.FacNo;
 +-------------+--------------+-------------+---------+----------+------------+----------+----------+--------+-------------+--------------+-------------+---------+----------+---------+---------+-----------+---------------+-------------+------------+
 | StdNo       | StdFirstName | StdLastName | StdCity | StdState | StdZip     | StdMajor | StdClass | StdGPA | FacNo       | FacFirstName | FacLastName | FacCity | FacState | FacDept | FacRank | FacSalary | FacSupervisor | FacHireDate | FacZipCode |
 +-------------+--------------+-------------+---------+----------+------------+----------+----------+--------+-------------+--------------+-------------+---------+----------+---------+---------+-----------+---------------+-------------+------------+
 | 876-54-3210 | CRISTOPHER   | COLAN       | SEATTLE | WA       | 98114-1332 | IS       | SR       |   4.00 | 876-54-3210 | CRISTOPHER   | COLAN       | SEATTLE | WA       | MS      | ASST    |  40000.00 | 654-32-1098   | 2011-03-01  | 98114-1332 |
 +-------------+--------------+-------------+---------+----------+------------+----------+----------+--------+-------------+--------------+-------------+---------+----------+---------+---------+-----------+---------------+-------------+------------+
-1 row in set (0.001 sec)
+
 

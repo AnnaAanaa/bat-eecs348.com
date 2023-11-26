@@ -1,0 +1,29 @@
+(1) Is there a fault in the program? If so, locate it.
+x[i] % 2 == 1 || x[i] > 0
+
+because it does not count negative odd numbers.
+
+it should be
+
+x[i] % 2 != 0 || x[i] > 0
+
+(2) If possible, define a test case that does not execute the fault.
+input : {} Null
+expected output : 0
+actual output : 0
+
+
+(3) If possible, define a test case that executes the fault but does not result in an error state.
+input : {1,2,3}
+expected output : 3
+actual output : 3
+
+(4) If possible, define a test case that results in an error, not failure.
+there can't be an error and not a failure. the only way to induce an error would require a negative number in the array which will in turn cause a failure.
+
+(5) If possible, define a test case that results in failure.
+input : {-3, -2, -1}
+expected output : 2
+actual output : 0
+
+
